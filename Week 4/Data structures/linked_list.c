@@ -5,10 +5,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct
+typedef struct nodeT
 {
   char *value;
-  struct node *next;
+  struct nodeT *next;
 } node;
 node *insertLast(char *value, node *last);
 node *insertFirst(char *value,node *head);
