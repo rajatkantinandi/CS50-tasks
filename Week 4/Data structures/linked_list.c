@@ -10,7 +10,7 @@ typedef struct
   char *value;
   struct node *next;
 } node;
-node *insertLast(char *value, node *list);
+node *insertLast(char *value, node *last);
 void printList(node *list);
 void freeMemory(node *list);
 int main(int argc, char const *argv[])
@@ -21,13 +21,13 @@ int main(int argc, char const *argv[])
   {
     for (int i = 1; i < argc; i++)
     {
-      tail = insertLast(argv[i], head);
+      tail = insertLast(argv[i], tail);
       if (head == NULL)
       {
         head = tail;
       }
     }
-    printf("The list: \n", head, head->value);
+    printf("The list: \n");
     printList(head);
     freeMemory(head);
     free(head);
@@ -39,7 +39,7 @@ int main(int argc, char const *argv[])
   }
   return 0;
 }
-node *insertLast(char *value, node *list)
+node *insertLast(char *value, node *last)
 {
   node *newItem = malloc(sizeof(node));
   if (newItem == NULL)
@@ -50,14 +50,12 @@ node *insertLast(char *value, node *list)
   {
     newItem->value = value;
     newItem->next = NULL;
-    for (node *ptr = list; ptr != NULL; ptr = ptr->next)
+    if (last == NULL)
     {
-      if (ptr->next == NULL)
-      {
-        ptr->next = newItem;
-        break;
-      }
+      last = newItem;
     }
+    else
+      last->next = newItem;
     return newItem;
   }
 }
