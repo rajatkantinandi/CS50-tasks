@@ -26,7 +26,13 @@ int main(int argc, char const *argv[])
     for (int i = 1; i < argc; i++)
     {
       if(choice==1){
+        if(head==NULL){
+        tail=insertFirst(argv[i],head);
+        head=tail;
+        }
+        else{          
         head=insertFirst(argv[i],head);
+        }
       }
       else if(choice==2){
         tail = insertLast(argv[i], tail);
@@ -93,6 +99,7 @@ node *insertFirst(char *value, node *head)
 }
 void printList(node *list)
 {
+  printf("Head -> ");
   for (node *ptr = list; ptr != NULL; ptr = ptr->next)
   {
     printf("%s -> ", ptr->value);
